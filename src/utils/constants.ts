@@ -1,5 +1,7 @@
 export const FILE_PATH = "/public/uploads";
 
+export const SIZE_LIMIT_IN_MB = 5;
+
 export const IMAGE_COLUMNS = [
   {
     header: "Filename",

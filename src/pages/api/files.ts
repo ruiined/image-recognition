@@ -1,4 +1,5 @@
 import { FILE_PATH } from "@/utils/constants";
+import { convertBytesToMbs } from "@/utils/helpers";
 import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -25,10 +26,11 @@ const fetchFiles = async (
           return;
         }
 
+        // TODO: Extract it as a helper function transformFileData()
         const fileData = {
           fileName,
-          fileSize: stats.size,
-          uploadTimestamp: stats.mtime,
+          fileSize: convertBytesToMbs(stats.size) + " MB",
+          uploadTimestamp: stats.mtime.toLocaleString("en-GB"),
         };
 
         fileList.push(fileData);

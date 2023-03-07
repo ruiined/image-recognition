@@ -1,5 +1,5 @@
 import { Tab } from "@headlessui/react";
-import { CATEGORIES } from "@/utils/constants";
+import { CATEGORIES, SIZE_LIMIT_IN_MB } from "@/utils/constants";
 import Table from "./Table";
 import { classNames } from "@/utils/helpers";
 import { useEffect, useState } from "react";
@@ -30,6 +30,12 @@ const App = () => {
 
     if (!selectedFile) return;
 
+    // TODO: Add more restrictions here e.g. file type, name, size & extract as a function validateFile()
+    if (selectedFile.size > 1024 * 1024 * SIZE_LIMIT_IN_MB) {
+      toast.error(`File size exceeds ${SIZE_LIMIT_IN_MB}MB`);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("image", selectedFile);
 
@@ -39,6 +45,7 @@ const App = () => {
     });
 
     if (response.ok) {
+      fetchFileData();
       toast.success("Image uploaded successfully.");
     } else {
       toast.error("Image upload failed.");
