@@ -18,7 +18,7 @@ const App = () => {
       if (err instanceof Error) {
         toast.error(err.message);
       } else {
-        toast.success("Something went wrong");
+        toast.error("Something went wrong");
       }
     }
   };
@@ -45,13 +45,14 @@ const App = () => {
     });
 
     if (response.ok) {
-      fetchFileData();
+      await fetchFileData();
       toast.success("Image uploaded successfully.");
     } else {
       toast.error("Image upload failed.");
     }
   };
 
+  // TODO: useMemo() for file data
   useEffect(() => {
     fetchFileData();
   }, []);
