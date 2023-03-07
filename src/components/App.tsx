@@ -83,18 +83,30 @@ const App = () => {
             ))}
           </Tab.List>
           <Tab.Panels className="pt-6">
-            <div>
-              <input type="file" onChange={handleUpload} />
-            </div>
             {CATEGORIES.map(
-              ({ title, columns }: { title: string; columns: Columns }) => (
-                <Tab.Panel
-                  key={title}
-                  className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
-                >
-                  <Table title={title} columns={columns} fileData={fileData} />
-                </Tab.Panel>
-              )
+              ({ title, columns }: { title: string; columns: Columns }) => {
+                return (
+                  <Tab.Panel
+                    key={title}
+                    className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+                  >
+                    {title === "Images" && (
+                      <div className="flex space-x-1 pt-4 pb-6">
+                        <input
+                          type="file"
+                          onChange={handleUpload}
+                          className="w-full rounded-lg border border-slate-200 text-slate-200 px-3 py-1.5 bg-transparent file:-mx-3 file:-my-1.5 file:cursor-pointer file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-slate-50 file:px-3 file:py-3 file:text-emerald-500 file:font-semibold file:transition-all file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] file:uppercase file:text-xs file:tracking-wide hover:file:bg-slate-100 "
+                        />
+                      </div>
+                    )}
+                    <Table
+                      title={title}
+                      columns={columns}
+                      fileData={fileData}
+                    />
+                  </Tab.Panel>
+                );
+              }
             )}
           </Tab.Panels>
         </Tab.Group>
