@@ -4,6 +4,7 @@ import Table from "./Table";
 import { classNames } from "@/utils/helpers";
 import { useEffect, useState } from "react";
 import type { Columns, FileData } from "@/utils/types";
+import { toast } from "react-hot-toast";
 
 const App = () => {
   const [fileData, setFileData] = useState<FileData[]>([]);
@@ -15,9 +16,9 @@ const App = () => {
       setFileData(data.files);
     } catch (err) {
       if (err instanceof Error) {
-        alert(err.message);
+        toast.error(err.message);
       } else {
-        alert("Something went wrong");
+        toast.success("Something went wrong");
       }
     }
   };
@@ -38,9 +39,9 @@ const App = () => {
     });
 
     if (response.ok) {
-      alert("Image uploaded successfully.");
+      toast.success("Image uploaded successfully.");
     } else {
-      alert("Image upload failed.");
+      toast.error("Image upload failed.");
     }
   };
 
