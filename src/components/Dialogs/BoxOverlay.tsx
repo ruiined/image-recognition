@@ -26,14 +26,16 @@ const BoxOverlay = ({ prediction, imageRatio }: BoxOverlay) => {
 
   return (
     <div
-      className="absolute bg-blue-500 bg-opacity-10 text-blue-800 text-xs font-semibold border border-solid border-blue-800"
+      className="absolute bg-blue-500 bg-opacity-10 text-blue-800 text-xs font-semibold border border-solid border-blue-800 text-right hover:bg-opacity-20 flex flex-col-reverse px-3"
       style={{
         top: box.top,
         left: box.left,
         width: box.width,
         height: box.height,
       }}
-    />
+    >
+      {label} {Math.round(score * 100)}%
+    </div>
   );
 };
 

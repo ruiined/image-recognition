@@ -1,4 +1,4 @@
-import { FileData, ImageDialog } from "@/utils/types";
+import { ImageDialog } from "@/utils/types";
 import { Dialog } from "@headlessui/react";
 
 const Images = ({ image, handleClose, savePredictionData }: ImageDialog) => {
