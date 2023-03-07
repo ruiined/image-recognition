@@ -2,8 +2,31 @@ import { Tab } from "@headlessui/react";
 import { CATEGORIES } from "@/utils/constants";
 import Table, { Columns } from "./Table";
 import { classNames } from "@/utils/helpers";
+import { useEffect, useState } from "react";
+
+export type FileData = {
+  fileName: string;
+  fileSize: number;
+  uploadTimestamp: Date;
+};
 
 const App = () => {
+  const [fileData, setFileData] = useState<FileData[]>([]);
+
+  const fetchFileData = async () => {
+    try {
+      const response = await fetch("/api/files");
+      const data = await response.json();
+      setFileData(data.files);
+    } catch (err) {
+      if (err instanceof Error) {
+        alert(err.message);
+      } else {
+        alert("Something went wrong");
+      }
+    }
+  };
+
   const handleUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
@@ -25,6 +48,12 @@ const App = () => {
       alert("Image upload failed.");
     }
   };
+
+  useEffect(() => {
+    fetchFileData();
+  }, []);
+
+  console.log({ fileData });
 
   return (
     <div className="flex justify-center mt-12 text-slate-900 bg-slate-50">
@@ -60,7 +89,7 @@ const App = () => {
                   key={title}
                   className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
                 >
-                  <Table title={title} columns={columns} />
+                  <Table title={title} columns={columns} fileData={fileData} />
                 </Tab.Panel>
               )
             )}
