@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
-
-const CATEGORIES = [{ title: "Images" }, { title: "Predictions" }];
+import { CATEGORIES } from "@/utils/constants";
+import Table from "./Table";
 
 const App = () => {
   return (
@@ -8,24 +8,24 @@ const App = () => {
       <h1>Image Recognition</h1>
       <Tab.Group>
         <Tab.List>
-          {CATEGORIES.map(({ title }) => (
+          {CATEGORIES.map(({ title }: { title: string }) => (
             <Tab key={title}>{title}</Tab>
           ))}
         </Tab.List>
         <Tab.Panels>
-          <Tab.Panel>
-            <table className="table-auto">
-              <thead>
-                <tr>Name</tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Value</td>
-                </tr>
-              </tbody>
-            </table>
-          </Tab.Panel>
-          <Tab.Panel>Prediction table</Tab.Panel>
+          {CATEGORIES.map(
+            ({
+              title,
+              columns,
+            }: {
+              title: string;
+              columns: { header: string; accessor: string }[];
+            }) => (
+              <Tab.Panel key={title}>
+                <Table title={title} columns={columns} />
+              </Tab.Panel>
+            )
+          )}
         </Tab.Panels>
       </Tab.Group>
     </div>
