@@ -1,12 +1,4 @@
-import { FileData } from "./App";
-
-export type Columns = { header: string; accessor: string }[];
-
-type Table = {
-  title: string;
-  columns: Columns;
-  fileData: FileData;
-};
+import type { FileData, Table } from "@/utils/types";
 
 const Table = ({ title, columns, fileData }: Table) => {
   return (
@@ -24,9 +16,20 @@ const Table = ({ title, columns, fileData }: Table) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Value</td>
-        </tr>
+        {fileData.map((file: FileData) => (
+          <tr
+            key={file?.fileName}
+            className=" border-b border-slate-100 text-sm last:border-b-0"
+          >
+            {columns.map(({ accessor }) => {
+              return (
+                <td key={accessor} className="p-3">
+                  {file[accessor]}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
       </tbody>
     </table>
   );

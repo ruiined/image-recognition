@@ -1,14 +1,9 @@
 import { Tab } from "@headlessui/react";
 import { CATEGORIES } from "@/utils/constants";
-import Table, { Columns } from "./Table";
+import Table from "./Table";
 import { classNames } from "@/utils/helpers";
 import { useEffect, useState } from "react";
-
-export type FileData = {
-  fileName: string;
-  fileSize: number;
-  uploadTimestamp: Date;
-};
+import type { Columns, FileData } from "@/utils/types";
 
 const App = () => {
   const [fileData, setFileData] = useState<FileData[]>([]);
