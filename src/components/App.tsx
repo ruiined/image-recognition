@@ -56,8 +56,6 @@ const App = () => {
     fetchFileData();
   }, []);
 
-  console.log({ fileData });
-
   return (
     <div className="flex justify-center mt-12 text-slate-900 bg-slate-50">
       <div className="w-full max-w-3xl px-2 py-16 sm:px-0">

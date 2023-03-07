@@ -16,4 +16,11 @@ export type FileData = {
 export type Modal = {
   isOpen: boolean;
   handleClose: () => void;
+  isPredictionTab: boolean;
+  image: FileData | undefined;
+};
+
+export type ImageDialog = {
+  image: FileData | undefined;
+  handleClose: () => void;
 };

@@ -4,6 +4,8 @@ import Modal from "./Modal";
 
 const Table = ({ title, columns, fileData }: Table) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [image, setImage] = useState<FileData>();
+  const isPredictionTab = title === "Predictions";
   return (
     <>
       <table className="table-auto w-full border-collapse">
@@ -32,10 +34,13 @@ const Table = ({ title, columns, fileData }: Table) => {
                       file[accessor]
                     ) : (
                       <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => {
+                          setImage(file);
+                          setIsModalOpen(true);
+                        }}
                         className="uppercase text-xs font-semibold text-blue-500 tracking-wider px-2 py-1 border border-transparent hover:text-blue-800 rounded-lg   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 ease-in duration-200"
                       >
-                        {title === "Predictions" ? "View" : "Predict"}
+                        {isPredictionTab ? "View" : "Predict"}
                       </button>
                     )}
                   </td>
@@ -45,7 +50,12 @@ const Table = ({ title, columns, fileData }: Table) => {
           ))}
         </tbody>
       </table>
-      <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)} />
+      <Modal
+        isOpen={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        isPredictionTab={isPredictionTab}
+        image={image}
+      />
     </>
   );
 };
