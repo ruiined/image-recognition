@@ -21,6 +21,18 @@ const Table = ({ title, columns, fileData }: Table) => {
     file.prediction = predictionData?.prediction;
   }, [predictionData, image, fileData]);
 
+  const hideTable =
+    !fileData?.length ||
+    (isPredictionTab && !fileData?.find((file) => file?.predictionTimestamp));
+
+  const showRow = (file: FileData) =>
+    !isPredictionTab || (isPredictionTab && file?.predictionTimestamp);
+
+  if (hideTable)
+    return (
+      <div className="text-center pt-8 pb-9 text-slate-400">Nothing here</div>
+    );
+
   return (
     <>
       <table className="table-auto w-full border-collapse">
@@ -37,32 +49,35 @@ const Table = ({ title, columns, fileData }: Table) => {
           </tr>
         </thead>
         <tbody>
-          {fileData.map((file: FileData) => (
-            <tr
-              key={file?.fileName}
-              className=" border-b border-slate-100 text-sm last:border-b-0"
-            >
-              {columns.map(({ accessor }) => {
-                return (
-                  <td key={accessor} className="p-3">
-                    {!accessor?.endsWith("Button") ? (
-                      file[accessor]
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setImage(file);
-                          setIsModalOpen(true);
-                        }}
-                        className="uppercase text-xs font-semibold text-blue-500 tracking-wider px-2 py-1 border border-transparent hover:text-blue-800 rounded-lg   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 ease-in duration-200"
-                      >
-                        {isPredictionTab ? "View" : "Predict"}
-                      </button>
-                    )}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
+          {fileData.map(
+            (file: FileData) =>
+              showRow(file) && (
+                <tr
+                  key={file?.fileName}
+                  className=" border-b border-slate-100 text-sm last:border-b-0"
+                >
+                  {columns.map(({ accessor }) => {
+                    return (
+                      <td key={accessor} className="p-3">
+                        {!accessor?.endsWith("Button") ? (
+                          file[accessor]
+                        ) : (
+                          <button
+                            onClick={() => {
+                              setImage(file);
+                              setIsModalOpen(true);
+                            }}
+                            className="uppercase text-xs font-semibold text-blue-500 tracking-wider px-2 py-1 border border-transparent hover:text-blue-800 rounded-lg   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 ease-in duration-200"
+                          >
+                            {isPredictionTab ? "View" : "Predict"}
+                          </button>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              )
+          )}
         </tbody>
       </table>
       <Modal
