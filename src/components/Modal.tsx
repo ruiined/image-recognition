@@ -1,9 +1,50 @@
+import { SERVER_URL } from "@/utils/constants";
 import type { Modal } from "@/utils/types";
 import { Dialog } from "@headlessui/react";
+import toast from "react-hot-toast";
 import Images from "./Dialogs/Images";
 
-const Modal = ({ isOpen, handleClose, isPredictionTab, image }: Modal) => {
-  console.log({ image });
+const Modal = ({
+  isOpen,
+  handleClose,
+  isPredictionTab,
+  image,
+  predictionData,
+  setPredictionData,
+}: Modal) => {
+  const fetchPrediction = async (): Promise<void> => {
+    try {
+      const response = await fetch(`${SERVER_URL}/predict`);
+
+      if (!response.ok) {
+        throw new Error("Network error getting the prediction");
+      }
+      const data = await response.json();
+
+      return data?.predictions;
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
+
+  const savePredictionData = async (title: string, description: string) => {
+    const prediction = await fetchPrediction();
+
+    setPredictionData({
+      id: image?.fileName ?? "",
+      title,
+      description,
+      timestamp: new Date().toLocaleString("gb-GB"),
+      prediction,
+    });
+
+    toast.success("Prediction saved successfully");
+  };
+
   return (
     <Dialog
       as="div"
@@ -16,7 +57,11 @@ const Modal = ({ isOpen, handleClose, isPredictionTab, image }: Modal) => {
           Nothing here yet
         </Dialog.Panel>
       ) : (
-        <Images image={image} handleClose={handleClose} />
+        <Images
+          image={image}
+          handleClose={handleClose}
+          savePredictionData={savePredictionData}
+        />
       )}
     </Dialog>
   );

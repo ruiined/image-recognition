@@ -1,11 +1,26 @@
-import type { FileData, Table } from "@/utils/types";
-import { useState } from "react";
+import type { FileData, PredictionData, Table } from "@/utils/types";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
 
 const Table = ({ title, columns, fileData }: Table) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [image, setImage] = useState<FileData>();
+  const [predictionData, setPredictionData] = useState<PredictionData>();
   const isPredictionTab = title === "Predictions";
+
+  useEffect(() => {
+    if (image?.fileName !== predictionData?.id) return;
+
+    const file = fileData?.find((file) => file?.fileName === image?.fileName);
+
+    if (!file) return;
+
+    file.title = predictionData?.title;
+    file.description = predictionData?.description;
+    file.predictionTimestamp = predictionData?.timestamp;
+    file.prediction = predictionData?.prediction;
+  }, [predictionData, image, fileData]);
+
   return (
     <>
       <table className="table-auto w-full border-collapse">
@@ -55,6 +70,8 @@ const Table = ({ title, columns, fileData }: Table) => {
         handleClose={() => setIsModalOpen(false)}
         isPredictionTab={isPredictionTab}
         image={image}
+        predictionData={predictionData}
+        setPredictionData={setPredictionData}
       />
     </>
   );

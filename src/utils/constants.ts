@@ -1,4 +1,5 @@
 export const FILE_PATH = "/public/uploads";
+export const SERVER_URL = "http://localhost:8000";
 
 export const SIZE_LIMIT_IN_MB = 5;
 

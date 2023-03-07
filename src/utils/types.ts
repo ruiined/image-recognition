@@ -13,14 +13,25 @@ export type FileData = {
   uploadTimestamp: Date;
 };
 
+export type PredictionData = {
+  id: string;
+  title: string;
+  description: string;
+  timestamp: string;
+  prediction: any;
+};
+
 export type Modal = {
   isOpen: boolean;
   handleClose: () => void;
   isPredictionTab: boolean;
   image: FileData | undefined;
+  predictionData: PredictionData | undefined;
+  setPredictionData: (data: PredictionData) => void;
 };
 
 export type ImageDialog = {
   image: FileData | undefined;
   handleClose: () => void;
+  savePredictionData: (title: string, description: string) => void;
 };

@@ -1,13 +1,13 @@
 import { FileData, ImageDialog } from "@/utils/types";
 import { Dialog } from "@headlessui/react";
 
-const Images = ({ image, handleClose }: ImageDialog) => {
+const Images = ({ image, handleClose, savePredictionData }: ImageDialog) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const title = formData.get("title")?.toString() ?? "";
     const description = formData.get("description")?.toString() ?? "";
-    console.log({ title, description });
+    savePredictionData(title, description);
     handleClose();
   };
 
