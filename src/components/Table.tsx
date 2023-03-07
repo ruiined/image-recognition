@@ -85,7 +85,6 @@ const Table = ({ title, columns, fileData }: Table) => {
         handleClose={() => setIsModalOpen(false)}
         isPredictionTab={isPredictionTab}
         image={image}
-        predictionData={predictionData}
         setPredictionData={setPredictionData}
       />
     </>
