@@ -12,3 +12,8 @@ export type FileData = {
   fileSize: number;
   uploadTimestamp: Date;
 };
+
+export type Modal = {
+  isOpen: boolean;
+  handleClose: () => void;
+};
