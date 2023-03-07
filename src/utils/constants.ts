@@ -1,3 +1,5 @@
+export const FILE_PATH = "/public/uploads";
+
 export const IMAGE_COLUMNS = [
   {
     header: "Filename",

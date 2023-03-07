@@ -4,6 +4,28 @@ import Table, { Columns } from "./Table";
 import { classNames } from "@/utils/helpers";
 
 const App = () => {
+  const handleUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
+    const selectedFile = event?.target?.files?.[0];
+
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert("Image uploaded successfully.");
+    } else {
+      alert("Image upload failed.");
+    }
+  };
+
   return (
     <div className="flex justify-center mt-12 text-slate-900 bg-slate-50">
       <div className="w-full max-w-3xl px-2 py-16 sm:px-0">
@@ -29,6 +51,9 @@ const App = () => {
             ))}
           </Tab.List>
           <Tab.Panels className="pt-6">
+            <div>
+              <input type="file" onChange={handleUpload} />
+            </div>
             {CATEGORIES.map(
               ({ title, columns }: { title: string; columns: Columns }) => (
                 <Tab.Panel
