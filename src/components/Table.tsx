@@ -1,6 +1,8 @@
+export type Columns = { header: string; accessor: string }[];
+
 type Table = {
   title: string;
-  columns: { header: string; accessor: string }[];
+  columns: Columns;
 };
 
 const Table = ({ title, columns }: Table) => {
