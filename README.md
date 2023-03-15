@@ -1,10 +1,10 @@
 # Image Recognition
 
-### Encord Front-End Coding Challenge
+Coding challenge that lets the user upload an image for AI predictions.
 
 ## My Approach
 
-Due to the tight limit of 3 hours, I did my research beforehand, especially for bbox dimension normalisation.
+I did my research beforehand, especially for bbox dimension normalisation.
 
 I've decided on NextJS as a framework and TailwindCSS for styling, with a help of HeadlessUI for accessibility of UI elements like tabs and dialogs.
 
@@ -41,3 +41,7 @@ Overall, I had a lot of fun with this challenge, as it required a lot of manoeuv
 1. `npm install` - to install dependencies
 2. `npm run dev` - to run locally
 3. `npm run server` - to run the server
+
+## Preview
+
+![Image_Recognition](https://user-images.githubusercontent.com/72412305/225410490-cead3b74-4d3b-4fe6-977f-552b15a67b25.gif)
