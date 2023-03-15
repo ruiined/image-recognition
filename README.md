@@ -2,6 +2,25 @@
 
 Coding challenge that lets the user upload an image for AI predictions.
 
+## Instructions
+
+1. `npm install` - to install dependencies
+2. `npm run dev` - to run locally
+3. `npm run server` - to run the server
+
+## Technologies
+
+- [Node.js](https://nodejs.dev) | Back-end JavaScript runtime environment
+- [React.js](https://reactjs.org) | Front-end JS library
+- [Next.js](https://nextjs.org/) | React framework
+- [Typescript](https://www.typescriptlang.org/) | Typed superset of JavaScript
+- [TailwindCSS](https://tailwindcss.com) | CSS framework
+- [ESLint](https://eslint.org/) | Linting utility
+- [HeadlessUI](https://headlessui.com/) | Accessible UI components
+- [Json-server](https://www.npmjs.com/package/json-server) | Fake REST API
+- [Formidable](https://www.npmjs.com/package/formidable) | Module for parsing file upload data
+- [React-hot-toast](https://react-hot-toast.com/) | Notification toasters
+
 ## My Approach
 
 I did my research beforehand, especially for bbox dimension normalisation.
@@ -17,30 +36,16 @@ Overall, I had a lot of fun with this challenge, as it required a lot of manoeuv
 ## Potential Improvements
 
 - Fix the first upload's slow response
+
 - Use ReactTable as a lightweight solution to sorting and filtering of the table
+
 - Handle file upload with the same name
+
 - Put limitations on file upload format, name and more
+
 - Reduce the amount of re-renders
+
 - Testing
-
-## Technologies
-
-- Node.js
-- React.js
-- Next.js
-- Typescript
-- TailwindCSS
-- ESLint
-
-- HeadlessUI | Accessible ui components
-- Json-server | Fake rest api
-- Formidable | Module for parsing file upload data
-
-## Instructions
-
-1. `npm install` - to install dependencies
-2. `npm run dev` - to run locally
-3. `npm run server` - to run the server
 
 ## Preview
 
